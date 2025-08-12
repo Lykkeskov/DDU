@@ -8,7 +8,7 @@ Noter til DDU på HTX
 Fungerer godt hvis processen er linier, men er ikke så godt i DDU/software-udvikling, hvor der er mange prototyper (iterativ proces)
 I stedet laver man små fremskridt og prototyper og tester.
 
-Det er ikke nødvendigt, at man bliver fulstændigt færdig
+Man bliver sansynligvis ikke færdig med sit produkt i DDU, man går bare i gennem en masse prototyper (iterativ proces) og forsøger at gøre det bedre.
 
 ![illustration af iterativ proces](Iterativ-proces.png)
 
@@ -79,3 +79,21 @@ and limitations of a design idea visible and measurable.
 Anatomy of prototypes:
 Prototypes are filters that traverse a design space and are manifestations of design ideas that
 concretize and externalize conceptual ideas.
+
+## Introprojekt
+Hvad vi har lært i dag:
+
+Prototyper
+* Lo-fi hi-fi
+* Anatomy: som filter, M.o.D.I
+
+Design spaces på Miro
+* Skitser
+* Scenarier
+* Wizard-of-Oz
+
+Interaktivt
+* Digitalt
+* Kode
+* Arduino
+* 
