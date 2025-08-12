@@ -96,4 +96,6 @@ Interaktivt
 * Digitalt
 * Kode
 * Arduino
-* 
+Vilde tavle ting:
+![tavle1](tavle1.jpg)
+![tavle2](tavle2.jpg)
