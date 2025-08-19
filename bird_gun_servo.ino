@@ -15,8 +15,8 @@ int yVal;
 int trykknap;
 
 void setup() {
-  sl1.attach(7);   // Servo 1
-  sl2.attach(8);   // Servo 2
+  sl1.attach(3);   // Servo 1
+  sl2.attach(5);   // Servo 2
 
   Serial.begin(9600);
   pinMode(knap, INPUT_PULLUP);  // button is active LOW
