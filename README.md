@@ -105,3 +105,7 @@ Vilde tavle ting:
 Jo mere man tester designet med brugere, jo bedre. Dog skal det ikke være brugerne der bestemmer hele designet.
 Hvis produktet er helt færdigt med de rigtige materiale og det hele, vil brugerne være mindre tilbøjlige til at foreslå endringer, der kunne gøre det bedre.
 Derfor er det en god ide at lave en masse prototyper, hvor det fx er tejnet eller lavet af pap, hvor tingene måske kan flyttes rundt.
+
+26/08/2025
+Fritzing https://orion.moore.dk/DDU/
+Software til at trække nogle klodser ind og dokumentere hardware. 
