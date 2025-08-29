@@ -9,8 +9,8 @@ Servo sl2;
 const int DEADZONE = 10;
 
 void setup() {
-  sl1.attach(3);
-  sl2.attach(5);
+  sl1.attach(5);   // Servo 1 pin
+  sl2.attach(9);   // Servo 2 pin
 
   Serial.begin(9600);
   Wire.begin();
@@ -19,10 +19,6 @@ void setup() {
 
 void loop() {
   if (nunchuk_read()) {
-//    int joyX = ((nunchuk_joystickX() + 112)*255/224)+10; // ~30–220 in practice
-  //  int joyY = ((nunchuk_joystickY() + 112)*255/200)-20;
-    //int btnZ = nunchuk_buttonZ();
-   // int btnC = nunchuk_buttonC();
     int joyX = nunchuk_joystickX(); // ~30–220 in practice
     int joyY = nunchuk_joystickY();
     int btnZ = nunchuk_buttonZ();
@@ -40,11 +36,16 @@ void loop() {
     sl1.write(servo1Cmd);
     sl2.write(servo2Cmd);
 
-    // Debug print
+    // If Z button is pressed → tell Python to show "BANG!"
+    if (btnZ == 1) {
+      Serial.println("BANG");
+    }
+
+    // Debug print (optional, can be removed)
     Serial.print("X: "); Serial.print(joyX);
-    Serial.print(" -> Servo1: "); Serial.print(servo1Cmd);
-    Serial.print("\tY: "); Serial.print(joyY);
     Serial.print(" -> Servo2: "); Serial.print(servo2Cmd);
+    Serial.print("\tY: "); Serial.print(joyY);
+    Serial.print(" -> Servo1: "); Serial.print(servo1Cmd);
     Serial.print("\tZ: "); Serial.print(btnZ);
     Serial.print("\tC: "); Serial.println(btnC);
   }
