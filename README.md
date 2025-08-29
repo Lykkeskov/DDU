@@ -109,3 +109,8 @@ Derfor er det en god ide at lave en masse prototyper, hvor det fx er tejnet elle
 26/08/2025
 Fritzing https://orion.moore.dk/DDU/
 Software til at trække nogle klodser ind og dokumentere hardware. 
+
+29/08/2025 Intro projekt
+Guide: Disconnect alle ledninger fra arduino (bortset fra usb) før upload af kode. Sørg også for at lukke PyCharm. Upload så kode og connect ledninger igen.
+Kør derefter python kode.
+
