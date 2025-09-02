@@ -3,9 +3,11 @@ import numpy as np
 import serial
 import threading
 import time
+import pygame
+from PIL import Image, ImageSequence
 
 # --- Load reference image of the bird ---
-ref_img = cv2.imread(r"C:\Users\hlykk\PycharmProjects\WebcamTest\due.png", cv2.IMREAD_GRAYSCALE)  # <-- put your path here
+ref_img = cv2.imread(r"C:\Users\hlykk\PycharmProjects\WebcamTest\due.png", cv2.IMREAD_GRAYSCALE)  # <-- bird reference image
 
 if ref_img is None:
     print("Error: Could not load reference image!")
@@ -22,7 +24,7 @@ search_params = dict(checks=50)
 flann = cv2.FlannBasedMatcher(index_params, search_params)
 
 # --- Serial setup (Arduino) ---
-ser = serial.Serial('COM4', 9600, timeout=1)  # change COM3 if needed
+ser = serial.Serial('COM4', 9600, timeout=1)  # change COM4 if needed
 time.sleep(2)  # allow Arduino reset
 bang_trigger = False
 
@@ -44,6 +46,18 @@ stream = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 if not stream.isOpened():
     print("Could not open webcam")
     exit()
+
+# --- Explosion GIF frames ---
+gif_path = r"C:\Users\hlykk\PycharmProjects\WebcamTest\explosion.gif"   # <-- explosion gif path
+gif = Image.open(gif_path)
+explosion_frames = [cv2.cvtColor(np.array(frame.convert("RGBA")), cv2.COLOR_RGBA2BGRA)
+                    for frame in ImageSequence.Iterator(gif)]
+
+explosion_index = -1  # -1 means no explosion
+
+# --- Sound setup ---
+pygame.mixer.init()
+bang_sound = pygame.mixer.Sound(r"C:\Users\hlykk\PycharmProjects\WebcamTest\sound.mp3")  # <-- sound file path
 
 while True:
     ret, frame = stream.read()
@@ -67,7 +81,7 @@ while True:
         matches = flann.knnMatch(des_ref, des_frame, k=2)
         good = []
         for m_n in matches:
-            if len(m_n) == 2:  # avoid "not enough values" error
+            if len(m_n) == 2:
                 m, n = m_n
                 if m.distance < 0.7 * n.distance:
                     good.append(m)
@@ -88,11 +102,39 @@ while True:
                 cv2.putText(frame, "Bird detected", (50, 50),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
-        # --- Show BANG effect if button pressed ---
+    # --- Explosion Trigger ---
     if bang_trigger:
-        cv2.putText(frame, "BANG!", (cx - 70, cy - 100),
-                    cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 5)
-        bang_trigger = False  # reset after showing once
+        explosion_index = 0  # start explosion animation
+        bang_sound.play()    # play sound
+        bang_trigger = False
+
+    # --- Show Explosion if active ---
+    if explosion_index >= 0 and explosion_index < len(explosion_frames):
+        explosion = explosion_frames[explosion_index]
+
+        # Resize explosion to ~1/3 of screen width
+        scale = w // 3
+        explosion = cv2.resize(explosion, (scale, scale), interpolation=cv2.INTER_AREA)
+
+        # Overlay explosion at crosshair
+        eh, ew = explosion.shape[:2]
+        x1, y1 = cx - ew // 2, cy - eh // 2
+        x2, y2 = x1 + ew, y1 + eh
+
+        # Ensure within bounds
+        if x1 >= 0 and y1 >= 0 and x2 <= w and y2 <= h:
+            overlay = frame[y1:y2, x1:x2]
+
+            # Blend explosion (with transparency)
+            alpha = explosion[:, :, 3] / 255.0
+            for c in range(3):
+                overlay[:, :, c] = (1 - alpha) * overlay[:, :, c] + alpha * explosion[:, :, c]
+
+            frame[y1:y2, x1:x2] = overlay
+
+        explosion_index += 1
+        if explosion_index >= len(explosion_frames):
+            explosion_index = -1  # stop animation
 
     cv2.imshow("Webcam with Bird & BANG", frame)
 
