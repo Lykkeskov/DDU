@@ -32,6 +32,12 @@ void loop() {
     if (abs(servo1Cmd - 90) < DEADZONE) servo1Cmd = 90;
     if (abs(servo2Cmd - 90) < DEADZONE) servo2Cmd = 90;
 
+    // --- Apply zoom sensitivity reduction if C pressed ---
+    if (btnC == 1) {
+      servo1Cmd = 90 + (servo1Cmd - 90) / 2;  // halve movement
+      servo2Cmd = 90 + (servo2Cmd - 90) / 2;
+    }
+
     // Write commands to servos
     sl1.write(servo1Cmd);
     sl2.write(servo2Cmd);
@@ -39,6 +45,13 @@ void loop() {
     // If Z button is pressed → tell Python to show "BANG!"
     if (btnZ == 1) {
       Serial.println("BANG");
+    }
+
+    // Tell Python when zoom is active
+    if (btnC == 1) {
+      Serial.println("ZOOM_ON");
+    } else {
+      Serial.println("ZOOM_OFF");
     }
 
     // Debug print (optional, can be removed)
