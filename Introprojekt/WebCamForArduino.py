@@ -7,7 +7,7 @@ import pygame
 from PIL import Image, ImageSequence
 
 # --- Load reference image of the bird ---
-ref_img = cv2.imread(r"C:\Users\hlykk\PycharmProjects\WebcamTest\due.png", cv2.IMREAD_GRAYSCALE)  # <-- bird reference image
+ref_img = cv2.imread(r"C:\\Users\\hlykk\\PycharmProjects\\WebcamTest\\due.png", cv2.IMREAD_GRAYSCALE)  # <-- bird reference image
 
 if ref_img is None:
     print("Error: Could not load reference image!")
@@ -27,14 +27,19 @@ flann = cv2.FlannBasedMatcher(index_params, search_params)
 ser = serial.Serial('COM4', 9600, timeout=1)  # change COM4 if needed
 time.sleep(2)  # allow Arduino reset
 bang_trigger = False
+zoom_mode = False
 
 def serial_listener():
-    global bang_trigger
+    global bang_trigger, zoom_mode
     while True:
         try:
             line = ser.readline().decode('utf-8').strip()
             if line == "BANG":
                 bang_trigger = True
+            elif line == "ZOOM_ON":
+                zoom_mode = True
+            elif line == "ZOOM_OFF":
+                zoom_mode = False
         except:
             pass
 
@@ -48,7 +53,7 @@ if not stream.isOpened():
     exit()
 
 # --- Explosion GIF frames ---
-gif_path = r"C:\Users\hlykk\PycharmProjects\WebcamTest\explosion.gif"   # <-- explosion gif path
+gif_path = r"C:\\Users\\hlykk\\PycharmProjects\\WebcamTest\\explosion.gif"   # <-- explosion gif path
 gif = Image.open(gif_path)
 explosion_frames = [cv2.cvtColor(np.array(frame.convert("RGBA")), cv2.COLOR_RGBA2BGRA)
                     for frame in ImageSequence.Iterator(gif)]
@@ -57,7 +62,7 @@ explosion_index = -1  # -1 means no explosion
 
 # --- Sound setup ---
 pygame.mixer.init()
-bang_sound = pygame.mixer.Sound(r"C:\Users\hlykk\PycharmProjects\WebcamTest\sound.mp3")  # <-- sound file path
+bang_sound = pygame.mixer.Sound(r"C:\\Users\\hlykk\\PycharmProjects\\WebcamTest\\sound.mp3")  # <-- sound file path
 
 while True:
     ret, frame = stream.read()
@@ -86,7 +91,7 @@ while True:
                 if m.distance < 0.7 * n.distance:
                     good.append(m)
 
-        if len(good) > 15:
+        if len(good) > 8:  # lowered threshold for easier detection
             src_pts = np.float32([kp_ref[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
             dst_pts = np.float32([kp_frame[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
 
@@ -101,6 +106,21 @@ while True:
 
                 cv2.putText(frame, "Bird detected", (50, 50),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    # --- Apply sniper zoom mode ---
+    if zoom_mode:
+        crop_ratio = 0.5  # 50% zoom
+        ch, cw = int(h * crop_ratio), int(w * crop_ratio)
+        x1, y1 = cx - cw // 2, cy - ch // 2
+        x2, y2 = x1 + cw, y1 + ch
+        cropped = frame[y1:y2, x1:x2]
+        frame = cv2.resize(cropped, (w, h), interpolation=cv2.INTER_LINEAR)
+
+        # Dark overlay around edges (scope look)
+        mask = np.zeros_like(frame, dtype=np.uint8)
+        cv2.circle(mask, (cx, cy), min(cx, cy) - 50, (255, 255, 255), -1)
+        blurred = cv2.GaussianBlur(frame, (99, 99), 0)
+        frame = np.where(mask==0, blurred, frame)
 
     # --- Explosion Trigger ---
     if bang_trigger:
