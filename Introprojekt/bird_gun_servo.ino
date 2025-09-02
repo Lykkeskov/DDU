@@ -25,8 +25,8 @@ void loop() {
     int btnC = nunchuk_buttonC();
 
     // Map joystick range (0–255) to servo command (0–180)
-    int servo1Cmd = map(joyY, -128, 128, 0, 180);
-    int servo2Cmd = map(joyX, -128, 128, 0, 180);
+    int servo1Cmd = map(joyY, -128, 128, 30, 150);
+    int servo2Cmd = map(joyX, -128, 128, 30, 150);
 
     // Apply deadzone around 90 (stop position for continuous servos)
     if (abs(servo1Cmd - 90) < DEADZONE) servo1Cmd = 90;
