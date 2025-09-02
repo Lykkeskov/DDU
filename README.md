@@ -114,3 +114,11 @@ Software til at trække nogle klodser ind og dokumentere hardware.
 Guide: Disconnect alle ledninger fra arduino (bortset fra usb) før upload af kode. Sørg også for at lukke PyCharm. Upload så kode og connect ledninger igen.
 Kør derefter python kode.
 
+
+02/09/2025
+Præsentation af introprojekt.
+Pointen med anatomy of prototype er at man siger/viser, hvilke filtrer man har brugt til hvilke prototyper, så man ved hvad formålet er.
+
+Man skal ikke nødvendigvis vise idegenerering og det alle har gjort.
+
+Man behøver ikke brugerteste alt, nogle ting skal man også bare selv vælge.
