@@ -122,3 +122,32 @@ Pointen med anatomy of prototype er at man siger/viser, hvilke filtrer man har b
 Man skal ikke nødvendigvis vise idegenerering og det alle har gjort.
 
 Man behøver ikke brugerteste alt, nogle ting skal man også bare selv vælge.
+
+## Projekt 2 - Embodied interaction
+09/09/2025
+5 temaer i "How Bodies Matter"
+1. Thinking/learning through doing:
+   - Epistimologi.
+   - Fysisk bevægelse og læring hænger sammen.
+   - Når man laver prototyper lærer man mere om sit produkt.
+2. Performance:
+   - Kroppen er effektiv.
+   - Der er noget at hente fra interaktion med kroppen i forhold til tech
+   - Acc/Gyro
+   - Afstand
+   - AR
+   - PIR
+3. Visibility
+   - Man kan se hvad der foregår
+   - Eksempel fra artiklen om flight control: Flyt fysisk papir, der repræsenterer fly. Selv om man laver noget andet kan man se der sker noget.
+   - Man forstår en interaktion ved, at nogle andre gør det. Pga. kropslig interaktion. Dokk1 digital interaktivt bodboldspil -> man kan lære det ved at se
+   - Forstå som tilskuter hvad og hvordan andre gør
+4. Risk:
+   - Tingene betyder noget, når der er noget på spil. Fx er det farligt, men også sjovt at køre på cykel
+   - Commitment, reliability
+5. Thickness of practice:
+   - Øvelse -> motor memory
+   - Gøre ting uden at tænke over det
+   - Genkendelige aktioner (finde ud af noget nyt, når man har prøvet noget der minder om)
+
+   
