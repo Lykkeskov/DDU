@@ -169,4 +169,5 @@ Kernebegreber:
 - Signifiers - grafiske/visuelle clues of use
 
 Ofte vil man gerne have "correct rejection" og "perceptible affordance", og ikke så meget "false affordance" og "hidden affordance", med mindre man fx laver en pussle
+
 ![Typer af affordances](Affordances.png)
