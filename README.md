@@ -125,7 +125,7 @@ Man behøver ikke brugerteste alt, nogle ting skal man også bare selv vælge.
 
 ## Projekt 2 - Embodied interaction
 09/09/2025
-5 temaer i "How Bodies Matter"
+### 5 temaer i "How Bodies Matter"
 1. Thinking/learning through doing:
    - Epistimologi.
    - Fysisk bevægelse og læring hænger sammen.
@@ -150,4 +150,23 @@ Man behøver ikke brugerteste alt, nogle ting skal man også bare selv vælge.
    - Gøre ting uden at tænke over det
    - Genkendelige aktioner (finde ud af noget nyt, når man har prøvet noget der minder om)
 
-   
+
+### Affordances og signifiers i design
+23/09/2025
+Affordances bruges og misbruges til at beskrive mange ting. Nogle gange er det en signifier og ikke en affordance
+En affordance er noget der muliggør noget. En stol fortæller med sin udformning at mankan sidde på den.
+Tingene er udformet så man ka nse hvordan man skal bruge det. Afkoder med sin krop.
+Gibson skrev i 1970'erne om dette og sagde det var kropsligt instiktivt.
+Donald Norman sagde det også handlede om kulturel afkodning -> talte meget om døre.
+Jenny Davis sagde det også handlede om designereing og designerens kultur, hvem der skal bruge det og deres kultur og forudsætninger.
+Victor Kaptelinin kom og klargjorde det. Introducerede signifiers
+Fx er lille knap på en drikkedukt farvet -> er ikke formgivet men en signifier.
+Mens flaksen selv er håndformet -> en affordance.
+
+Kernebegreber:
+- Gibson affordances - instiktive
+- Norman affordances - kulturelle
+- Signifiers - grafiske/visuelle clues of use
+
+Ofte vil man gerne have "correct rejection" og "perceptible affordance", og ikke så meget "false affordance" og "hidden affordance", med mindre man fx laver en pussle
+![Typer af affordances](Affordances.png)
