@@ -171,3 +171,7 @@ Kernebegreber:
 Ofte vil man gerne have "correct rejection" og "perceptible affordance", og ikke så meget "false affordance" og "hidden affordance", med mindre man fx laver en pussle
 
 ![Typer af affordances](Affordances.png)
+
+28/10/2025
+Projektstyring
+Når mn bruger scrum er det vigtigt at man siger hvilke dele man bruger og ikke bruger.
